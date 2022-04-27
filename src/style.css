@@ -1,0 +1,43 @@
+html {
+    background-color: #696969;
+    font-family: 'Arial';
+}
+
+input {
+    width: 90vmin;
+    border: 1;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+    border-radius: 1vmin;
+}
+
+input .twitterHandle {
+    width: 40vmin
+}
+
+button {
+    border-radius: 1vmin;
+}
+
+button:hover {
+    opacity: .7;
+}
+
+#storyContainer {
+    width: 80vmin;
+    background-color: black;
+    color: aliceblue;
+    border-radius: 1vmin;
+    padding-left: 1vmin;
+}
+
+#intro {
+    width: 90vmin;
+    background-color: black;
+    color: aliceblue;
+    border-radius: 1vmin;
+    padding-left: 1vmin;
+}
+
+#twitterHandle {
+    width: 40vmin;
+}

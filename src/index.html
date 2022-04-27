@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="/dist/bundle.js"></script>
+    <title>Add Three Lines</title>
+</head>
+<!-- Hide everything first, just give the instructions and let's begin button (optional twitter handle space too)-->
+<body>
+    <h3 id="titleText">Start the story...</h3>
+    <button id="getLines">Let's begin</button>
+        <div id="intro">
+            <span id="lastLineWritten"></span> </br>
+            <span id="introText">No pressure!</span>
+        </div>
+
+        <div id="textLines" hidden="true">
+            <input type="text" maxlength="100" id="firstLine" /><span id="lineOneCount">100</span>
+            <br/>
+            <input type="text" maxlength="100" id="secondLine" /><span id="lineTwoCount">100</span>
+            <br/>
+            <input type="text" maxlength="100" id="thirdLine" /><span id="lineThreeCount">100</span>
+            <br/>
+            <input type="text" id="twitterHandle"/><span>Add your Twitter username if you'd like a mention when the story is finished!</span>
+            <br/>
+            <button type="button" id="submitButton">I'm ready</button>
+        </div>
+
+        <div id="storyContainer">
+            <p id="storySoFar">
+
+            </p>
+        </div>
+
+        <div id="howThisWorks">
+            <h2>What is this?</h2>
+            <div id="instructions">We're writing a short story together.<br>
+            Add 3 lines to the story, following on from the last line written.<br>
+            Whoever comes next will only see the last line you wrote.<br>
+            Once 36 lines are written, the story is complete!
+            </div>
+            <div id="twitterStuff">The full story will be published by <a href="">TBA TWITTER HANDLE</a> <br>
+            Look out for story number <span id="storyNumber">###</span>.
+            </div>
+            
+        </div>
+</body>
+</html>

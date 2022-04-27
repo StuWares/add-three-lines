@@ -1,7 +1,13 @@
-// Import the functions you need from the SDKs you need
+// TODO: Unlocking locked stories if nobody updates them for a while
+// Use a cloud function to run every 5 mins and unlock anything with a last edit time older than 5 mins?
+// Will also need to find a way to stop the first user from updating after the timeout (tricky with anon auth!)
+// Maybe a second collection to track what stories have been sent out but not yet had a submission back?
+// Also need to deal with newly created stories that haven't had any lines added (same timeout needed)
+// Can update the IF to treat a story with linetext length of 0 as brand new?
+
+// Firebase sdk imports
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
-//import { getDatabase, ref, set } from "firebase/database";
 import { doc, 
         getFirestore, 
         query, 
@@ -13,11 +19,10 @@ import { doc,
         setDoc, 
         updateDoc, arrayUnion, increment } from "firebase/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
+
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Public Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAnQEf9FwA00AZkqrGw3L5FN1lDY0n6Q5o",
   authDomain: "add-3-lines.firebaseapp.com",
@@ -71,7 +76,7 @@ signInAnonymously(auth).then(() => {
 
 // find the story ID of the oldest that the user hasn't edited last 
 // don't think the query will do what I want exactly but enough for now! (needing to orderBy lastuseredit first is problematic)
-// I'm also not checking for locked / complete stories!
+
 async function beginWriting(writerId){
     document.getElementById("getLines").hidden = true;
     // line below is for testing purposes only
@@ -81,7 +86,6 @@ async function beginWriting(writerId){
     const querySnapshot = await getDocs(q);
     console.log(querySnapshot);
 
-    // not sure if this returns null or undefined!
     if (querySnapshot.size > 0) {
     // if we've found a valid story, bring in the last line of linetext array
         querySnapshot.forEach((doc) => {
@@ -135,8 +139,6 @@ async function beginWriting(writerId){
         document.getElementById("lastLineWritten").innerHTML = " ";
         document.getElementById('titleText').innerHTML = "It's time to begin a new story!";
     }
-
-
 };
     
 

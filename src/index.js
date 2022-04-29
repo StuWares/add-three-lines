@@ -19,6 +19,8 @@ import { doc,
         setDoc, 
         updateDoc, arrayUnion, increment } from "firebase/firestore";
 
+import { pageTimer } from "./helpers";
+
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -39,6 +41,12 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const storyColRef = collection(db, "stories");
+let subTimer = pageTimer();
+
+const stopSubTimer = () => {
+    clearTimeout(subTimer);
+};
+
 
 
 
@@ -138,6 +146,8 @@ async function beginWriting(writerId){
         document.getElementById("introText").innerHTML = "Let's begin...";
         document.getElementById("lastLineWritten").innerHTML = " ";
         document.getElementById('titleText').innerHTML = "It's time to begin a new story!";
+        subTimer = pageTimer();
+        subTimer();
     }
 };
     
@@ -183,6 +193,7 @@ submitButton.addEventListener('click', async event => {
         document.getElementById('titleText').innerHTML = "Please write 3 lines";
     } else {
         submitButton.hidden = true;
+        stopSubTimer();
 
         const updateTime = new Date;
 

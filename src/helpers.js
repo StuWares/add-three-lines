@@ -1,5 +1,8 @@
+const timeSet = 30000; // 300000 ms = 5 min delay, use 30000 (30 secs) for debugging
+export let subTimerId;
+
 export function pageTimer() {
-    setTimeout(() => {
+    subTimerId = setTimeout(() => {
         document.getElementById("getLines").hidden = false;
         document.getElementById("getLines").innerHTML= "Try again?"
         document.getElementById("textLines").hidden = true;
@@ -15,5 +18,9 @@ export function pageTimer() {
         document.getElementById('lineThreeCount').innerHTML = 100;
 
     }        
-    ,300000)
+    ,timeSet)
  }
+
+ export function cancelSubTimer(timerId){
+    clearTimeout(timerId);
+}
